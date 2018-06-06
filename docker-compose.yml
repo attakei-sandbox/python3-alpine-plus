@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  mysqlserver:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  mysql:
+    build: mysql
+    image: attakei/python3-alpine-plus:3.6-mysql-latest
+    links:
+      - mysqlserver
+    volumes:
+      - ./mysql:/app
+    command: python /app/test_run.py
